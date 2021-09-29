@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Main = () => {
     return (
         <Container>
-          <h1>Welcome</h1>
+          <h1>welcome to <br /> Single <span> event...</span></h1>
         </Container>
     )
 }
@@ -17,13 +17,18 @@ const Container = styled.div`
   align-items: center;
 
   h1 {
-    font-size: 45px;
+    font-size: 49px;
     font-weight: 900;
     color: #343434;
 
     @media (max-width: 900px) {
       display: none;
     }
+  }
+
+  span {
+    color: #0097FF;
+    font-size: 42px;
   }
 `
 
