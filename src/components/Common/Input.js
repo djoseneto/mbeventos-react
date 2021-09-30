@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function input({ type, placeholder, name }) {
-      
+function input({ type, placeholder, name, id, onChange, value }) {
+
   return (
     <Container>
       <StyledInput 
@@ -10,6 +10,10 @@ function input({ type, placeholder, name }) {
         placeholder={placeholder && placeholder}
         required
         autoComplete="off"
+        name={name}
+        id={id}
+        onChange={onChange}
+        value={value}
       />
       <Status />
     </Container>

@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import StoreContext from '../store/Context'
 import styled from 'styled-components'
 import logoImg from '../../assets/single-event-logo.svg'
 import Input from '../Common/Input'
@@ -7,25 +9,47 @@ function initialState() {
   return {email: '', password: ''};
 }
 
+function login ({email, password}) {
+  if (email === 'josera@gmail.com' && password === '1234') {
+    return {token: '1234'};
+  }
+  return {error: 'wrong email or password!'}
+}
+
 const Sidebar = () => {
 
   const [values, setValues] = useState(initialState);
+  const { setToken } = useContext(StoreContext)
+  const history = useHistory();
  
   function onChange(event) {
     const { value, name } = event.target;
-    
+
     setValues({
       ...values,
       [name]: value,
     })
   }
-  
+
+
+  function onSubmit(event) {
+    event.preventDefault();
+
+    const { token } = login(values);
+
+    if (token) {
+      setToken(token);
+      return history.push('/')
+    }
+    setValues(initialState);
+  } 
+
     return (
         <Container>
             <LogoWrapper>
                 <img src={logoImg} alt="single event" />
             </LogoWrapper>
-            <Form>
+            <Form onSubmit={onSubmit}>
                 <h3>Login</h3>
                 <Input
                   id="email" 
@@ -92,7 +116,7 @@ const LogoWrapper = styled.div`
   }
 `;
 
-const Form = styled.div` 
+const Form = styled.form` 
   width: 100%;
   display: flex;
   flex-direction: column;
