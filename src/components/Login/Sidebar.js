@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import logoImg from '../assets/single-event-logo.svg'
-import Input from './Input'
+import logoImg from '../../assets/single-event-logo.svg'
+import Input from '../Common/Input'
+
+function initialState() {
+  return {email: '', password: ''};
+}
 
 const Sidebar = () => {
+
+  const [values, setValues] = useState(initialState);
+ 
+  function onChange(event) {
+    const { value, name } = event.target;
+    
+    setValues({
+      ...values,
+      [name]: value,
+    })
+  }
+  
     return (
         <Container>
             <LogoWrapper>
@@ -11,8 +27,22 @@ const Sidebar = () => {
             </LogoWrapper>
             <Form>
                 <h3>Login</h3>
-                <Input type="email" placeholder="your email" />
-                <Input type="password" placeholder="your password" />
+                <Input
+                  id="email" 
+                  name="email" 
+                  type="email" 
+                  placeholder="your email"
+                  onChange={onChange}
+                  value={values.email}
+                />
+                <Input
+                  id="password" 
+                  name="password" 
+                  type="password" 
+                  placeholder="your password"
+                  onChange={onChange}
+                  value={values.password}
+                />
                 <button>Go</button>
             </Form>
             <Terms>

@@ -1,18 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function input({ type, placeholder }) {
-    return (
-        <Container>
-          <StyledInput 
-            type={type} 
-            placeholder={placeholder && placeholder}
-            required
-            autoComplete="off"
-          />
-          <Status />
-        </Container>
-    )
+function input({ type, placeholder, name }) {
+      
+  return (
+    <Container>
+      <StyledInput 
+        type={type} 
+        placeholder={placeholder && placeholder}
+        required
+        autoComplete="off"
+      />
+      <Status />
+    </Container>
+  )
 }
 
 const Container = styled.div`

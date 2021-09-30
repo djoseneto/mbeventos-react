@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import bgImg from '../assets/bg-login.png'
+import bgImg from '../../assets/bg-login.png'
 import Sidebar from './Sidebar'
 import Main from './Main'
 
