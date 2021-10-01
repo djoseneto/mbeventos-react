@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import bgImg from '../../assets/bg-login.png'
-import Sidebar from '../../components/Login/Sidebar'
 import Main from '../../components/Login/Main'
+import Sidebar from '../../components/Login/Sidebar'
 
 const App = () => {
   return (

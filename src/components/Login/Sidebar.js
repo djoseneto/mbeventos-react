@@ -1,79 +1,47 @@
-import React, { useState, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
-import StoreContext from '../store/Context'
+import React, { useCallback } from 'react'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import styled from 'styled-components'
 import logoImg from '../../assets/single-event-logo.svg'
 import Input from '../Common/Input'
+import { Link } from 'react-router-dom'
 
-function initialState() {
-  return {email: '', password: ''};
-}
+export const Sidebar = () => {
+  const handleSubmit = useCallback(async e => {
+    e.preventDefault()
 
-function login ({email, password}) {
-  if (email === 'josera@gmail.com' && password === '1234') {
-    return {token: '1234'};
-  }
-  return {error: 'wrong email or password!'}
-}
-
-const Sidebar = () => {
-
-  const [values, setValues] = useState(initialState);
-  const { setToken } = useContext(StoreContext)
-  const history = useHistory();
- 
-  function onChange(event) {
-    const { value, name } = event.target;
-
-    setValues({
-      ...values,
-      [name]: value,
-    })
-  }
-
-
-  function onSubmit(event) {
-    event.preventDefault();
-
-    const { token } = login(values);
-
-    if (token) {
-      setToken(token);
-      return history.push('/')
+    const { email, password } = e.target.elements
+    const auth = getAuth()
+    try {
+      await signInWithEmailAndPassword(auth, email.value, password.value)
+    } catch (e) {
+      alert(e.message)
     }
-    setValues(initialState);
-  } 
+  }, [])
 
     return (
         <Container>
             <LogoWrapper>
                 <img src={logoImg} alt="single event" />
             </LogoWrapper>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <h3>Login</h3>
                 <Input
-                  id="email" 
                   name="email" 
                   type="email" 
                   placeholder="your email"
-                  onChange={onChange}
-                  value={values.email}
                 />
                 <Input
-                  id="password" 
                   name="password" 
                   type="password" 
                   placeholder="your password"
-                  onChange={onChange}
-                  value={values.password}
                 />
-                <button>Go</button>
+                <button type="submit">Go</button>
             </Form>
             <Terms>
               Forgot your password? <br /> <span>Click here!</span>
             </Terms>
             <h4>
-              Don't have an account? <span>Register!</span>
+              Don't have an account? <Link style={{textDecoration: 'none'}} to="/signup"><span> Register! </span></Link>
             </h4>
         </Container>
     )
@@ -105,6 +73,10 @@ const Container = styled.div`
     span {
       color: #FE2F75;
       cursor: pointer;
+    }
+
+    Link {
+      background-color: green;
     }
   }
 `;

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { getAuth, signOut } from 'firebase/auth'
+import { useAuthState } from '../../firebase'
 import styled from 'styled-components'
 import logoImg from '../../assets/home/logo-navbar.svg'
 import aboutIcon from '../../assets/home/about.png'
@@ -9,6 +11,7 @@ import '../../assets/css/fonts.css'
 
 function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useAuthState()
 
     return (
       <Nav>
@@ -21,9 +24,10 @@ function NavBar() {
               <span />
           </Hamburger>
           <Menu isOpen={isOpen}>
+              <button onClick={() => signOut(getAuth())}> Sign Out</button>
               <MenuLink href="#"> About <img src={aboutIcon} alt="" /></MenuLink>
               <MenuLink href="#"> Create your event <img src={penIcon} alt="" /></MenuLink>
-              <MenuLink href="#"> Your Name <img src={userIcon} alt="" /></MenuLink>
+              <MenuLink href="#"> {user?.email} <img src={userIcon} alt="" /></MenuLink>
           </Menu>
       </Nav>
     )
@@ -75,6 +79,21 @@ const Menu = styled.div`
   position: relative;
   margin-right: 2rem;
   margin-top: 1rem;
+
+  button {
+      padding: 0.5rem;
+      border: none;
+      background-color: #0099ffea;
+      border-radius: 4px;
+      color: #FFFFFC;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1d8fdbfd;
+        transform: translateY(-3px);
+      }
+
+  }
 
   @media (max-width: 768px) {
     overflow: hidden;

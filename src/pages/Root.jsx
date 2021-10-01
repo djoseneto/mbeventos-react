@@ -1,24 +1,49 @@
-import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-} from 'react-router-dom';
-import StoreProvider from '../components/store/Provider';
-import RoutesPrivate from '../components/Routes/Private/Private';
-import Home from './Home/Home';
-import Login from './Login/Login';
+  Redirect
+} from 'react-router-dom'
+import Home from './Home/Home'
+import Login from './Login/Login'
+import { SignUp } from './SignUp/SignUp'
+import { AuthContextProvider, useAuthState } from '../firebase'
 
-const PagesRoot = () => (
-  <Router>
-    <StoreProvider>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <RoutesPrivate path="/" component={Home} />
-      </Switch>
-    </StoreProvider>
-  </Router>
-)
+const AuthenticatedRoute = ({ component: C, ...props }) => {
+  const { isAuthenticated } = useAuthState()
+  console.log(`AuthenticatedRoute: ${isAuthenticated}`)
+  return (
+    <Route
+      {...props}
+      render={routeProps =>
+        isAuthenticated ? <C {...routeProps} /> : <Redirect to="/login" />
+      }
+    />
+  )
+}
 
+const UnauthenticatedRoute = ({ component: C, ...props }) => {
+  const { isAuthenticated } = useAuthState()
+  console.log(`UnauthenticatedRoute: ${isAuthenticated}`)
+  return (
+    <Route
+      {...props}
+      render={routeProps =>
+        !isAuthenticated ? <C {...routeProps} /> : <Redirect to="/" />
+      }
+    />
+  )
+}
 
-export default PagesRoot;
+function App() {
+  return (
+    <AuthContextProvider>
+      <Router>
+        <AuthenticatedRoute path="/" component={Home} />
+        <UnauthenticatedRoute path="/login" component={Login} />
+        <UnauthenticatedRoute  path="/signup" component={SignUp} />
+      </Router>
+    </AuthContextProvider>
+  )
+}
+
+export default App

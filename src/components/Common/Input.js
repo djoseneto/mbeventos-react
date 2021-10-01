@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function input({ type, placeholder, name, id, onChange, value }) {
+function input({ type, placeholder, name}) {
 
   return (
     <Container>
@@ -11,9 +11,6 @@ function input({ type, placeholder, name, id, onChange, value }) {
         required
         autoComplete="off"
         name={name}
-        id={id}
-        onChange={onChange}
-        value={value}
       />
       <Status />
     </Container>
