@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import NavBar from '../../components/Home/NavBar'
+import HeroSection from '../../components/Home/HeroSection'
 
 function Home() {
     return (
       <Container>
         <NavBar />
+        <HeroSection />
       </Container>
     )
 }

@@ -82,15 +82,24 @@ const Menu = styled.div`
 
   button {
       padding: 0.5rem;
-      border: none;
+      border-width: 0px;
       background-color: #0099ffea;
       border-radius: 4px;
       color: #FFFFFC;
       cursor: pointer;
+      transition: 0.5s;
 
       &:hover {
-        background-color: #1d8fdbfd;
-        transform: translateY(-3px);
+        background-color: #FFFFFC;
+        color: #0099ffea;
+        transform: translateY(-2px);
+
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-width: 1px;
+        border-radius: 0px;
+        border-color: #0099ffea;
       }
 
   }
