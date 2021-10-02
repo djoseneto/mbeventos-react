@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import seachIcon from '../../assets/home/search.png'
+import searchIcon from '../../assets/home/search.png'
 import Card from './Card';
 import MenuLink from './MenuLink';
 import Items from '../../Data';
 
 const allCategories = ['All', ...new Set(Items.map(item => item.category))];
 
-console.log(allCategories);
-
 function TabNavigation() {
   const [menuItem, setMenuItem] = useState(Items);
   const [buttons] = useState(allCategories);
+  const [search, setSearch] = useState('All')
+
+  const eventsFilter = (events) => {
+    let cat = events.target.value
+    if(cat === 'All'){
+      setMenuItem(Items);
+      return;
+    }
+
+    const filteredData = Items.filter(item => item.category ===  cat);
+    setMenuItem(filteredData)
+  }
 
   //Filter Function
   const filter = (button) =>{
@@ -30,8 +40,14 @@ function TabNavigation() {
           <Tab>
             <MenuLink button={buttons} filter={filter}/>
             <SearchEvent>
-                <img src={seachIcon} alt="" />
-                <InputSearch type="text" placeholder="search" />
+                <img src={searchIcon} alt="" />
+                <InputSearch 
+                  type="text" 
+                  placeholder="search" 
+                  value={search} 
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyUp={eventsFilter}
+                />
             </SearchEvent>
           </Tab>
           <ContainerCard>

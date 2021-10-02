@@ -6,7 +6,7 @@ function MenuLink({button, filter}) {
         <Container>
             {
                 button.map((cat, i)=>{
-                    return <button type="button" onClick={()=> filter(cat)} className="btn">{cat}</button>
+                    return <button type="button" onClick={()=> filter(cat)}>{cat}</button>
                 })
             }
         </Container>
