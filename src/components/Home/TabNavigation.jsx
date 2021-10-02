@@ -126,6 +126,27 @@ const ContainerCard = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 0fr);
   grid-gap: 0.1rem;
+
+  @media (max-width: 1024px) {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 0fr);
+    grid-gap: 0.1rem;
+  }
+
+  @media (max-width: 900px) {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1, 0fr);
+    grid-gap: 0.1rem;
+  }
+
+  @media (max-width: 425px) {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(1, 0fr);
+    grid-gap: 0.1rem;
+  }
 `;
 
 export default TabNavigation

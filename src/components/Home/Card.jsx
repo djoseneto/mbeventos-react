@@ -25,10 +25,21 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 280px;
+  margin-bottom: 1rem;
 
   img {
     width: 280px;
     height: 280px;
+  }
+
+  @media (max-width: 720px) {
+    padding: 0;
+    align-items: center;
+    width: 100%;
+
+    img {
+      width: 320px;
+    }
   }
 `;
 
