@@ -41,6 +41,7 @@ const Items = [
         price: 'Gratuito',
         local: 'Faculdade Descomplica',
         category: 'On-line',
+        icon: 'iconPlay',
         followers: '2.1k followers'
     },
     {
