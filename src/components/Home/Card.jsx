@@ -14,7 +14,7 @@ function Card({cardItem}) {
                       <IconHeartStyled src={iconHeart} alt="" />
                     </IconContainer>
                     <DescriptionCard>
-                        <h2><img src={(item.category == 'On-line') ? iconPlay : iconGroup} alt="" /> {item.title}</h2>
+                        <h2><img src={(item.category === 'On-line') ? iconPlay : iconGroup} alt="" /> {item.title}</h2>
                         <span>{item.data}</span>
                         <p>{item.price}</p>
                         <h3>{item.local}</h3>
