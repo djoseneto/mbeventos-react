@@ -2,7 +2,7 @@ import event1 from './assets/home/events/event-1.jpg'
 import event2 from './assets/home/events/event-2.jpg'
 import event3 from './assets/home/events/event-3.jpg'
 
-export default [
+const Items = [
     {
         id:1,
         image: event1,
@@ -152,5 +152,7 @@ export default [
         local: 'Faculdade Descomplica',
         category: 'charity and causes',
         followers: '2.1k followers'
-    },
+    }
 ];
+
+export default Items;

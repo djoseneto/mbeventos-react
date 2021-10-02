@@ -3,25 +3,25 @@ import styled from 'styled-components';
 import seachIcon from '../../assets/home/search.png'
 import Card from './Card';
 import MenuLink from './MenuLink';
-import items from '../../Data';
+import Items from '../../Data';
 
-const allCategories = ['All', ...new Set(items.map(item => item.category))];
+const allCategories = ['All', ...new Set(Items.map(item => item.category))];
 
 console.log(allCategories);
 
 function TabNavigation() {
-  const [menuItem, setMenuItem] = useState(items);
+  const [menuItem, setMenuItem] = useState(Items);
   const [buttons] = useState(allCategories);
 
   //Filter Function
   const filter = (button) =>{
 
     if(button === 'All'){
-      setMenuItem(items);
+      setMenuItem(Items);
       return;
     }
 
-    const filteredData = items.filter(item => item.category ===  button);
+    const filteredData = Items.filter(item => item.category ===  button);
     setMenuItem(filteredData)
   }
     return (
