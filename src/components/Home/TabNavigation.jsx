@@ -11,7 +11,7 @@ console.log(allCategories);
 
 function TabNavigation() {
   const [menuItem, setMenuItem] = useState(items);
-  const [buttons, setButtons] = useState(allCategories);
+  const [buttons] = useState(allCategories);
 
   //Filter Function
   const filter = (button) =>{
