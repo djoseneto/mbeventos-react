@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import searchIcon from '../../assets/home/search.png'
 import Card from './Card';
@@ -6,32 +7,35 @@ import MenuLink from './MenuLink';
 import Items from '../../Data';
 
 const allCategories = ['All', ...new Set(Items.map(item => item.category))];
+let categorySelected = 'All';
 
 function TabNavigation() {
-  const [menuItem, setMenuItem] = useState(Items);
+  const history = useHistory();
+  const [menuItem, setMenuItem] = useState(Items.slice(0, 8));
   const [buttons] = useState(allCategories);
   const [search, setSearch] = useState('All')
 
   const eventsFilter = (events) => {
+    categorySelected = events
     let cat = events.target.value
     if(cat === 'All'){
-      setMenuItem(Items);
+      setMenuItem(Items.slice(0, 8));
       return;
     }
 
-    const filteredData = Items.filter(item => item.category ===  cat);
+    const filteredData = Items.filter(item => item.category ===  cat || item.title ===  cat).slice(0, 8);
     setMenuItem(filteredData)
   }
 
   //Filter Function
   const filter = (button) =>{
-
+    categorySelected = button
     if(button === 'All'){
-      setMenuItem(Items);
+      setMenuItem(Items.slice(0, 8));
       return;
     }
 
-    const filteredData = Items.filter(item => item.category ===  button);
+    const filteredData = Items.filter(item => item.category ===  button || item.title ===  button).slice(0, 8);
     setMenuItem(filteredData)
   }
     return (
@@ -53,6 +57,9 @@ function TabNavigation() {
           <ContainerCard>
             <Card cardItem={menuItem}/>
           </ContainerCard>
+          <ContainerButton>
+            <ButtonStyle onClick={() => history.push(`/events/${(categorySelected)}`)}>Show more</ButtonStyle>
+          </ContainerButton>
         </Container>
     )
 }
@@ -147,6 +154,33 @@ const ContainerCard = styled.div`
     grid-template-columns: repeat(1, 0fr);
     grid-gap: 0.1rem;
   }
+`;
+
+const ContainerButton = styled.div`
+  width: 100%;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`;
+
+const ButtonStyle = styled.button`
+    padding: 1rem;
+    width: 400px;
+    cursor: pointer;
+    background-color: #FFFFFC;
+    border-width: 2px;
+    border-color: #e0e1e9;
+    border-radius: 4px;
+    transition: 0.4s;
+    font-size: 1rem;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #FBFBFB;
+      transform: translateY(-3px);
+    }
 `;
 
 export default TabNavigation

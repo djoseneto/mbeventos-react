@@ -1,11 +1,13 @@
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
   Redirect
 } from 'react-router-dom'
 import Home from './Home/Home'
 import Login from './Login/Login'
 import { SignUp } from './SignUp/SignUp'
+import  Events  from './Events/Events'
 import { AuthContextProvider, useAuthState } from '../firebase'
 
 const AuthenticatedRoute = ({ component: C, ...props }) => {
@@ -38,9 +40,12 @@ function App() {
   return (
     <AuthContextProvider>
       <Router>
-        <AuthenticatedRoute path="/" component={Home} />
-        <UnauthenticatedRoute path="/login" component={Login} />
-        <UnauthenticatedRoute  path="/signup" component={SignUp} />
+        <Switch>
+          <AuthenticatedRoute path="/" exact component={Home} />
+          <AuthenticatedRoute path="/events/:category" exact component={Events} />
+          <UnauthenticatedRoute path="/login" exact component={Login} />
+          <UnauthenticatedRoute  path="/signup" exact component={SignUp} />
+        </Switch>
       </Router>
     </AuthContextProvider>
   )
