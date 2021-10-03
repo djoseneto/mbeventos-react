@@ -6,13 +6,28 @@ import Card from '../../components/Events/Card'
 import Items from '../../Data';
 
 const allCategories = ['All', ...new Set(Items.map(item => item.category))];
+let categorySelected = 'All';
 
-function Events() {
-    const [menuItem, setMenuItem] = useState(Items.slice(0, 8));
+function Events(props) {
+    const allEvents = useState(Items)
+
+    const selectedEvents = useState(Items.filter(item => (item.category === props.match.params.category)))
+    const [menuItem, setMenuItem] = useState((selectedEvents[0][0]) ? selectedEvents[0] : allEvents[0]);
     const [buttons] = useState(allCategories);
     const [search, setSearch] = useState('All')
+
+    const eventsFilter = (events) => {
+        categorySelected = events
+        let cat = events.target.value
+        if(cat === 'All'){
+          setMenuItem(Items.slice(0, 8));
+          return;
+        }
     
-    //Filter Function
+        const filteredData = Items.filter(item => item.category ===  cat || item.title ===  cat).slice(0, 8);
+        setMenuItem(filteredData)
+      }
+    
     const filter = (button) =>{
       if(button === 'All'){ 
       setMenuItem(Items.slice(0, 8));
@@ -26,10 +41,19 @@ function Events() {
     return (
         <Container>
           <NavBar />
+          <ContainerInput>
+            <input  
+              value={search} 
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={eventsFilter}
+              type="text" 
+              placeholder="search"
+            />
+          </ContainerInput>
           <ContainerGrid>
-             <Sidebar>
-               <MenuLink button={buttons} filter={filter}/>
-             </Sidebar>
+          <Sidebar >
+            <MenuLink button={buttons} filter={filter}/>
+          </Sidebar>
              <Content>
                 <Card cardItem={menuItem}/>
              </Content>
@@ -40,13 +64,35 @@ function Events() {
 
 const Container = styled.div`
   background: #FFFFFC;
-  height: 90vh;
+  height: 100vh;
+  overflow: hidden;
 `
+const ContainerInput = styled.div`
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   input {
+    padding: 1rem;
+    width: 80%;
+    background-color: #F8F7FC;
+    border-radius: 4px;
+    border-width: 1px;
+  }
+
+  @media (min-width: 728px) {
+    display: none;
+  }
+`;
+
 const ContainerGrid = styled.div`
+  padding: 1rem;
   width: 100%;
   height: auto;
   background-color: #FFF;
   display: grid;
+  overflow: hidden;
   grid-template-columns: repeat(3, 0fr);
   
   @media (max-width: 720px) {
@@ -58,6 +104,7 @@ const ContainerGrid = styled.div`
 
 const Sidebar = styled.div`
   width: 300px;
+  max-height: 100%;
   padding: 1rem;
   align-items: center;
   display: flex;
@@ -70,7 +117,7 @@ const Sidebar = styled.div`
 
 const Content = styled.div`
   width: 700px;
-  height: 90vh;
+  max-height: 85vh;
   display: flex;
   overflow: auto;
   flex-direction: column;

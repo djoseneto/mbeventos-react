@@ -27,7 +27,6 @@ function TabNavigation() {
     setMenuItem(filteredData)
   }
 
-  //Filter Function
   const filter = (button) =>{
     categorySelected = button
     if(button === 'All'){

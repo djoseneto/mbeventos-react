@@ -4,7 +4,7 @@ import event3 from './assets/home/events/event-3.jpg'
 
 const Items = [
     {
-        id:1,
+        id: 1,
         image: event1,
         title: 'Onboard - Faculdade Descomplica',
         data:  'sex, 1 de out de 2021 ás 18:00-04',
@@ -14,7 +14,7 @@ const Items = [
         followers: '2.1k followers'
     },
     {
-        id:2,
+        id: 2,
         image: event1,
         title: 'Onboard - Faculdade Descomplica',
         data:  'sex, 1 de out de 2021 ás 18:00-04',
@@ -24,7 +24,7 @@ const Items = [
         followers: '2.1k followers'
     },
     {
-        id:3,
+        id: 3,
         image: event1,
         title: 'Onboard - Faculdade Descomplica',
         data:  'sex, 1 de out de 2021 ás 18:00-04',

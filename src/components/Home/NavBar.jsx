@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router';
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from '../../firebase'
 import styled from 'styled-components'
@@ -6,10 +7,12 @@ import logoImg from '../../assets/home/logo-navbar.svg'
 import aboutIcon from '../../assets/home/about.png'
 import penIcon from '../../assets/home/pen.png'
 import userIcon from '../../assets/home/user.png'
+import arrowLeftIcon from '../../assets/left-arrow.png'
 
 import '../../assets/css/fonts.css'
 
 function NavBar() {
+    const history = useHistory() 
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useAuthState()
 
@@ -24,6 +27,7 @@ function NavBar() {
               <span />
           </Hamburger>
           <Menu isOpen={isOpen}>
+              <button onClick={() => history.goBack()}> <img src={arrowLeftIcon} alt="" /> Go back</button>
               <button onClick={() => signOut(getAuth())}> Sign Out</button>
               <MenuLink href="#"> About <img src={aboutIcon} alt="" /></MenuLink>
               <MenuLink href="#"> Create your event <img src={penIcon} alt="" /></MenuLink>
@@ -82,12 +86,21 @@ const Menu = styled.div`
 
   button {
       padding: 0.5rem;
+      margin-right: 15px;
       border-width: 0px;
       background-color: #0099ffea;
       border-radius: 4px;
       color: #FFFFFC;
       cursor: pointer;
       transition: 0.5s;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+
+      img {
+        max-width: 0.8rem;
+        max-height: 0.8rem;
+      } 
 
       &:hover {
         background-color: #FFFFFC;
