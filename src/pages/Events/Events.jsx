@@ -6,7 +6,6 @@ import Card from '../../components/Events/Card'
 import Items from '../../Data';
 
 const allCategories = ['All', ...new Set(Items.map(item => item.category))];
-let categorySelected = 'All';
 
 function Events(props) {
     const allEvents = useState(Items)
@@ -17,7 +16,6 @@ function Events(props) {
     const [search, setSearch] = useState('All')
 
     const eventsFilter = (events) => {
-        categorySelected = events
         let cat = events.target.value
         if(cat === 'All'){
           setMenuItem(Items.slice(0, 8));
