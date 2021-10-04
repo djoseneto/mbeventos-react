@@ -102,7 +102,7 @@ const ContainerGrid = styled.div`
 
 const Sidebar = styled.div`
   width: 300px;
-  max-height: 100%;
+  height: 100vh;
   padding: 1rem;
   align-items: center;
   display: flex;

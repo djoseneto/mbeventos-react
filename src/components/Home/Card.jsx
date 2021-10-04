@@ -1,14 +1,16 @@
 import React from 'react'
 import styled from 'styled-components';
+import { useHistory } from 'react-router';
 import iconUser from '../../assets/home/user.png'
 import iconHeart from '../../assets/home/heart.png'
 import iconPlay from '../../assets/home/play.png'
 import iconGroup from '../../assets/home/group.png'
 
 function Card({cardItem}) {
+    const history = useHistory() 
     return (
         cardItem.map((item) =>{
-            return <CardContainer key={item.id}>
+            return <CardContainer key={item.id} onClick={() => history.push(`/events-details/${item.id}`)}>
                     <img src={item.image} alt=""/>
                     <IconContainer>
                       <IconHeartStyled src={iconHeart} alt="" />

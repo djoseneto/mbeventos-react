@@ -8,6 +8,7 @@ import Home from './Home/Home'
 import Login from './Login/Login'
 import { SignUp } from './SignUp/SignUp'
 import  Events  from './Events/Events'
+import DetailsEvent from './DetailsEvent/DetailsEvent'
 import { AuthContextProvider, useAuthState } from '../firebase'
 
 const AuthenticatedRoute = ({ component: C, ...props }) => {
@@ -43,6 +44,7 @@ function App() {
         <Switch>
           <AuthenticatedRoute path="/" exact component={Home} />
           <AuthenticatedRoute path="/events/:category" exact component={Events} />
+          <AuthenticatedRoute path="/events-details/:idEvent" exact component={DetailsEvent} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
           <UnauthenticatedRoute  path="/signup" exact component={SignUp} />
         </Switch>
